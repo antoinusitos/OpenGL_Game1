@@ -34,5 +34,11 @@
     <None Include="src\3.3.shader.fs">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="src\3.3.texture.fs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="src\3.3.texture.vs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
