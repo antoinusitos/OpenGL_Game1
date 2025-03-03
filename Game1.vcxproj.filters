@@ -18,8 +18,21 @@
     <ClCompile Include="src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Shader_s.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\3.3.shader.vs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="src\3.3.shader.fs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
