@@ -137,15 +137,17 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader_s.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="src\3.3.coordinate_system.fs" />
+    <None Include="src\3.3.coordinate_system.vs" />
     <None Include="src\3.3.shader.fs" />
     <None Include="src\3.3.shader.vs" />
     <None Include="src\3.3.texture.fs" />
     <None Include="src\3.3.texture.vs" />
     <None Include="src\3.3.transform.fs" />
     <None Include="src\3.3.transform.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Utilities\Shader_s.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
