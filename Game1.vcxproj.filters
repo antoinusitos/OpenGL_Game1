@@ -13,39 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{b0a38e6a-996a-4ed8-a9bc-a04a12e79a31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glad.c">
+      <Filter>Source Files\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\3.3.shader.vs">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="src\3.3.shader.fs">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="src\3.3.texture.fs">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="src\3.3.texture.vs">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="src\3.3.transform.vs">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="src\3.3.transform.fs">
-      <Filter>Source Files</Filter>
+    <None Include="src\3.3.coordinate_system.fs">
+      <Filter>Source Files\src</Filter>
     </None>
     <None Include="src\3.3.coordinate_system.vs">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src</Filter>
     </None>
-    <None Include="src\3.3.coordinate_system.fs">
-      <Filter>Source Files</Filter>
+    <None Include="src\3.3.shader.fs">
+      <Filter>Source Files\src</Filter>
+    </None>
+    <None Include="src\3.3.shader.vs">
+      <Filter>Source Files\src</Filter>
+    </None>
+    <None Include="src\3.3.texture.fs">
+      <Filter>Source Files\src</Filter>
+    </None>
+    <None Include="src\3.3.texture.vs">
+      <Filter>Source Files\src</Filter>
+    </None>
+    <None Include="src\3.3.transform.fs">
+      <Filter>Source Files\src</Filter>
+    </None>
+    <None Include="src\3.3.transform.vs">
+      <Filter>Source Files\src</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +56,10 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Camera.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cube.h">
+      <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
