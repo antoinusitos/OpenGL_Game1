@@ -52,5 +52,8 @@
     <ClInclude Include="include\Utilities\Shader_s.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
