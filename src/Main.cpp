@@ -1,7 +1,5 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-/*#define STB_IMAGE_IMPLEMENTATION
-#include "utilities/stb_image.h"*/
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -9,7 +7,9 @@
 
 #include "utilities/shader_s.h"
 #include "Camera.h"
-#include "Cube.h"
+#include "Shapes/Cube.h"
+#include "Shapes/Plane.h"
+#include "Shapes/Shape.h"
 
 #include <iostream>
 
@@ -68,30 +68,11 @@ int main()
 		return -1;
 	}
 
-	// configure global opengl state
-	// -----------------------------
-	glEnable(GL_DEPTH_TEST);
-
 	// build and compile our shader zprogram
 	// ------------------------------------
 	Shader* ourShader = new Shader("src/3.3.coordinate_system.vs", "src/3.3.coordinate_system.fs");
 
-	glm::vec3 cubePositions[] = {
-	//dirt
-		glm::vec3(0.0f,  -1.50f,  0.0f),
-		glm::vec3(0.0f,  -1.50f,  -1.0f),
-		glm::vec3(0.0f,  -1.50f,  -2.0f),
-		glm::vec3(0.0f,  -1.50f,  -3.0f),
-		glm::vec3(0.0f,  -1.50f,  -4.0f),
-		glm::vec3(0.0f,  -1.50f,  -5.0f),
-		glm::vec3(0.0f,  -1.50f,  -6.0f),
-		glm::vec3(0.0f,  -1.50f,  -7.0f),
-		glm::vec3(0.0f,  -1.50f,  -8.0f),
-		glm::vec3(0.0f,  -1.50f,  -9.0f),
-		glm::vec3(0.0f,  -1.50f,  -10.0f),
-	};
-
-	Cube* cubes[] = {
+	Shape* shapes[] = {
 		//dirt
 		new Cube(glm::vec3(0.0f,  -1.50f,  0.0f), "Textures/dirt.png"),
 		new Cube(glm::vec3(0.0f,  -1.50f,  -1.0f), "Textures/dirt.png"),
@@ -129,6 +110,28 @@ int main()
 		new Cube(glm::vec3(1.0f,  -1.50f,  -8.0f), "Textures/grass.png"),
 		new Cube(glm::vec3(1.0f,  -1.50f,  -9.0f), "Textures/grass.png"),
 		new Cube(glm::vec3(1.0f,  -1.50f,  -10.0f), "Textures/grass.png"),
+
+		new Plane(glm::vec3(0.0f,  -0.5f,  -8.0f), "Textures/skeleton.png", true),
+
+		new Plane(glm::vec3(1.0f,  0.0f,  -9.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -8.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -7.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -6.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -5.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -4.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -3.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -2.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(1.0f,  0.0f,  -1.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -1.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -9.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -8.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -7.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -6.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -5.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -4.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -3.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -2.0f), "Textures/tree.png", true, true, 2.0f),
+		new Plane(glm::vec3(-1.0f,  0.0f,  -1.0f), "Textures/tree.png", true, true, 2.0f),
 	};
 
 	// tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
@@ -151,7 +154,12 @@ int main()
 		// render
 		// ------
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// configure global opengl state
+		// -----------------------------
+		glEnable(GL_DEPTH_TEST);
 
 		// activate shader
 		ourShader->use();
@@ -163,10 +171,13 @@ int main()
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		ourShader->setMat4("projection", projection);
 
-		for (unsigned int i = 0; i < sizeof(cubes) / sizeof(cubes[0]); i++)
+		int l = (sizeof(shapes) / sizeof(shapes[0]));
+		for (unsigned int i = 0; i < l - 1; i++)
 		{
-			cubes[i]->Render(ourShader);
+			shapes[i]->Render(ourShader, camera);
 		}
+
+		shapes[l - 1]->Render(ourShader, camera);
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
@@ -178,10 +189,12 @@ int main()
 	// ------------------------------------------------------------------------
 	for (unsigned int i = 0; i < 10; i++)
 	{
-		cubes[i]->Free();
+		shapes[i]->Free();
 	}
 
 	delete ourShader;
+
+	ResourceLoader::GetInstance().Free();
 
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	// ------------------------------------------------------------------

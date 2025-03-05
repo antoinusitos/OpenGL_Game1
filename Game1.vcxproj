@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\ResourceLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\3.3.coordinate_system.fs" />
@@ -149,7 +150,10 @@
   <ItemGroup>
     <ClInclude Include="include\Utilities\Shader_s.h" />
     <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\Cube.h" />
+    <ClInclude Include="src\ResourceLoader.h" />
+    <ClInclude Include="src\Shapes\Cube.h" />
+    <ClInclude Include="src\Shapes\Plane.h" />
+    <ClInclude Include="src\Shapes\Shape.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

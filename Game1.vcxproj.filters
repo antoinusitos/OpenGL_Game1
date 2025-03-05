@@ -16,12 +16,18 @@
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{b0a38e6a-996a-4ed8-a9bc-a04a12e79a31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Shapes">
+      <UniqueIdentifier>{20ce159b-7728-4a50-9621-c68bd37e919a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="src\glad.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceLoader.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -58,8 +64,17 @@
     <ClInclude Include="src\Camera.h">
       <Filter>Source Files\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Cube.h">
+    <ClInclude Include="src\ResourceLoader.h">
       <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shapes\Shape.h">
+      <Filter>Source Files\src\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shapes\Plane.h">
+      <Filter>Source Files\src\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shapes\Cube.h">
+      <Filter>Source Files\src\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
