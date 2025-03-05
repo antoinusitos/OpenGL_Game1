@@ -18,6 +18,13 @@ void processInput(GLFWwindow* window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
+
 int main()
 {
 	// glfw: initialize and configure
@@ -192,6 +199,13 @@ int main()
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
 
+	// pass projection matrix to shader (as projection matrix rarely changes there's no need to do this per frame)
+	// -----------------------------------------------------------------------------------------------------------
+	// projection = Camera info (fov, near, far)
+	float fov = 45.0f;
+	glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+	// pass transformation matrices to the shader
+	ourShader.setMat4("projection", projection);
 
 	// render loop
 	// -----------
@@ -216,15 +230,14 @@ int main()
 		ourShader.use();
 
 		// create transformations
+		const float radius = 10.0f;
+		float camX = sin(glfwGetTime()) * radius;
+		float camZ = cos(glfwGetTime()) * radius;
 		// view = Camera position
-		glm::mat4 view =		glm::mat4(1.0f);  // make sure to initialize matrix to identity matrix first
-		// projection = Camera info (fov, near, far)
-		glm::mat4 projection =	glm::mat4(1.0f);
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-		float fov = 45.0f;
-		projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		// pass transformation matrices to the shader
-		ourShader.setMat4("projection", projection);
+		glm::mat4 view = glm::mat4(1.0f);  // make sure to initialize matrix to identity matrix first
+		view = glm::lookAt(	glm::vec3(camX, 0.0f, camZ),
+							cameraTarget,
+							up);
 		ourShader.setMat4("view", view);
 
 		// render container
