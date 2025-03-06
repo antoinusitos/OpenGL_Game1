@@ -5,6 +5,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "MusicManager.h"
+
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum Camera_Movement {
     FORWARD,
@@ -21,6 +23,15 @@ const float SENSITIVITY = 0.1f;
 const float FOV = 45.0f;
 const float FOVMIN = 1.0f;
 const float FOVMAX = 90.0f;
+
+const int xMin = -1;
+const int xMax = 1;
+const int zMin = -10;
+const int zMax = 0;
+
+bool canMove = true;
+const float timeToMove = 0.15f;
+float currentTime = 0.0f;
 
 class Camera
 {
@@ -58,6 +69,21 @@ public:
         updateCameraVectors();
     }
 
+    void Tick(float deltaTime)
+    {
+        updateCameraVectors();
+
+        if (!canMove)
+        {
+            currentTime += deltaTime;
+            if (currentTime >= timeToMove)
+            {
+                canMove = true;
+                currentTime = 0.0f;
+            }
+        }
+    }
+
     // returns the view matrix calculated using Euler Angles and the LookAt Matrix
     glm::mat4 GetViewMatrix()
     {
@@ -67,24 +93,74 @@ public:
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
-        float velocity = MovementSpeed * deltaTime;
-        if (direction == FORWARD)
-            Position += Front * velocity;
-        if (direction == BACKWARD)
-            Position -= Front * velocity;
-        if (direction == LEFT)
-            Position -= Right * velocity;
-        if (direction == RIGHT)
-            Position += Right * velocity;
+        if (!canMove)
+        {
+            return;
+        }
 
-        Position.y = 0;
+        glm::vec3 movement = glm::vec3(0.0f);
+
+        if (direction == FORWARD)
+        {
+            movement += Front;
+        }
+        if (direction == BACKWARD)
+        {
+            movement -= Front;
+        }
+        if (direction == LEFT)
+        {
+            ProcessMouseMovement(-90, 0);
+            canMove = false;
+            return;
+            movement -= Right;
+        }
+        if (direction == RIGHT)
+        {
+            ProcessMouseMovement(90, 0);
+            canMove = false;
+            return;
+            movement += Right;
+        }
+
+        movement.x = round(movement.x);
+        movement.z = round(movement.z);
+
+        if (AllowToMove(movement))
+        {
+            MusicManager::GetInstance().PlaySound("Sounds/Footstep.wav");
+            Position += movement;
+            canMove = false;
+            Position.y = 0;
+        }
+    }
+
+    bool AllowToMove(glm::vec3 newPos)
+    {
+        glm::vec3 finalPos = Position + newPos;
+        if (newPos.x > 0.0f)
+        {
+            return finalPos.x <= xMax;
+        }
+        else if (newPos.x < 0.0f)
+        {
+            return finalPos.x >= xMin;
+        }
+        else if (newPos.z < 0.0f)
+        {
+            return finalPos.z >= zMin;
+        }
+        else if (newPos.z > 0.0f)
+        {
+            return finalPos.z <= zMax;
+        }
     }
 
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
     {
-        xoffset *= MouseSensitivity;
-        yoffset *= MouseSensitivity;
+        //xoffset *= MouseSensitivity;
+        //yoffset *= MouseSensitivity;
 
         Yaw += xoffset;
         Pitch += yoffset;

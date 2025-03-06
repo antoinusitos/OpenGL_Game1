@@ -10,8 +10,10 @@
 #include "Shapes/Cube.h"
 #include "Shapes/Plane.h"
 #include "Shapes/Shape.h"
+#include "MusicManager.h"
 
 #include <iostream>
+#include <list>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -27,10 +29,11 @@ float deltaTime = 0.0f;	// Time between current frame and last frame
 float lastFrame = 0.0f; // Time of last frame
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 1.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 0.0f));
 float lastX = SCR_WIDTH / 2;
 float lastY = SCR_HEIGHT / 2;
 bool firstMouse = true;
+const bool useOrbit = false;
 
 int main()
 {
@@ -68,71 +71,66 @@ int main()
 		return -1;
 	}
 
+	MusicManager::GetInstance();
+
+	MusicManager::GetInstance().PlaySound("Sounds/Background.wav");
+
 	// build and compile our shader zprogram
 	// ------------------------------------
 	Shader* ourShader = new Shader("src/3.3.coordinate_system.vs", "src/3.3.coordinate_system.fs");
 
-	Shape* shapes[] = {
-		//dirt
-		new Cube(glm::vec3(0.0f,  -1.50f,  0.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -1.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -2.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -3.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -4.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -5.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -6.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -7.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -8.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -9.0f), "Textures/dirt.png"),
-		new Cube(glm::vec3(0.0f,  -1.50f,  -10.0f), "Textures/dirt.png"),
+	std::list<Shape*> newShapes;
 
-		//grass
-		new Cube(glm::vec3(-1.0f,  -1.50f,  0.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -1.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -2.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -3.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -4.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -5.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -6.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -7.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -8.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -9.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(-1.0f,  -1.50f,  -10.0f), "Textures/grass.png"),
+	std::ifstream file("LVL.txt");
+	std::string str;
+	std::cout << "Loading LVL.txt...:" << std::endl;
+	while (std::getline(file, str))
+	{
+		float x = 0.0f;
+		float y = 0.0f;
+		float z = 0.0f;
 
-		new Cube(glm::vec3(1.0f,  -1.50f,  0.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -1.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -2.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -3.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -4.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -5.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -6.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -7.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -8.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -9.0f), "Textures/grass.png"),
-		new Cube(glm::vec3(1.0f,  -1.50f,  -10.0f), "Textures/grass.png"),
+		std::string delimiter = ":";
+		std::string token = str.substr(0, str.find(delimiter));
+		std::string type = token;
+		str.erase(0, str.find(delimiter) + delimiter.length());
+		token = str.substr(0, str.find(delimiter));
+		std::string pos = token;
+		std::string posDelimiter = ",";
+		for (int i = 0; i < 3; i++)
+		{
+			std::string posSingle = pos.substr(0, str.find(posDelimiter));
+			if (i == 0)
+			{
+				x = std::stof(posSingle);
+			}
+			else if (i == 1)
+			{
+				y = std::stof(posSingle);
+			}
+			else if (i == 2)
+			{
+				z = std::stof(posSingle);
+			}
+			pos.erase(0, pos.find(posDelimiter) + posDelimiter.length());
+		}
 
-		new Plane(glm::vec3(0.0f,  -0.5f,  -8.0f), "Textures/skeleton.png", true),
+		str.erase(0, str.find(delimiter) + delimiter.length());
 
-		new Plane(glm::vec3(1.0f,  0.0f,  -9.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -8.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -7.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -6.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -5.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -4.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -3.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -2.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(1.0f,  0.0f,  -1.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -1.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -9.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -8.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -7.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -6.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -5.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -4.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -3.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -2.0f), "Textures/tree.png", true, true, 2.0f),
-		new Plane(glm::vec3(-1.0f,  0.0f,  -1.0f), "Textures/tree.png", true, true, 2.0f),
-	};
+		Shape* newShape = nullptr;
+		if (type == "Cube")
+		{
+			std::string texture = "Textures/" + str + ".png";
+			newShape = new Cube(glm::vec3(x, y, z), texture.c_str());
+		}
+		else if (type == "Plane")
+		{
+			std::string texture = "Textures/" + str + ".png";
+			newShape = new Plane(glm::vec3(0.0f, -0.5f, -8.0f), texture.c_str(), true);
+		}
+
+		newShapes.push_back(newShape);
+	}
 
 	// tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
 	// -------------------------------------------------------------------------------------------
@@ -146,6 +144,8 @@ int main()
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
+
+		camera.Tick(deltaTime);
 
 		// input
 		// -----
@@ -171,13 +171,10 @@ int main()
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		ourShader->setMat4("projection", projection);
 
-		int l = (sizeof(shapes) / sizeof(shapes[0]));
-		for (unsigned int i = 0; i < l - 1; i++)
+		for (Shape* singleShape : newShapes)
 		{
-			shapes[i]->Render(ourShader, camera);
+			singleShape->Render(ourShader, camera);
 		}
-
-		shapes[l - 1]->Render(ourShader, camera);
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
@@ -187,9 +184,9 @@ int main()
 
 	// optional: de-allocate all resources once they've outlived their purpose:
 	// ------------------------------------------------------------------------
-	for (unsigned int i = 0; i < 10; i++)
+	for (Shape* singleShape : newShapes)
 	{
-		shapes[i]->Free();
+		singleShape->Free();
 	}
 
 	delete ourShader;
@@ -221,6 +218,11 @@ void processInput(GLFWwindow* window)
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
+	if (!useOrbit)
+	{
+		return;
+	}
+
 	float xpos = static_cast<float>(xposIn);
 	float ypos = static_cast<float>(yposIn);
 

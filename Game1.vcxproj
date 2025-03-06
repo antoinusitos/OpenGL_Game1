@@ -133,8 +133,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\Utilities\miniaudio.c" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MusicManager.cpp" />
     <ClCompile Include="src\ResourceLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,8 +150,10 @@
     <None Include="src\3.3.transform.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Utilities\miniaudio.h" />
     <ClInclude Include="include\Utilities\Shader_s.h" />
     <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\MusicManager.h" />
     <ClInclude Include="src\ResourceLoader.h" />
     <ClInclude Include="src\Shapes\Cube.h" />
     <ClInclude Include="src\Shapes\Plane.h" />

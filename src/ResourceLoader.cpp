@@ -28,7 +28,7 @@ void ResourceLoader::GetTexture(const char* texture, int& inWidth, int& inHeight
 	}
 	else
 	{
-		std::cout << "Failed to load texture" << std::endl;
+		std::cout << "Failed to load texture:" << texture << std::endl;
 	}
 }
 

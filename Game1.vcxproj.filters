@@ -30,6 +30,12 @@
     <ClCompile Include="src\ResourceLoader.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="include\Utilities\miniaudio.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MusicManager.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\3.3.coordinate_system.fs">
@@ -75,6 +81,12 @@
     </ClInclude>
     <ClInclude Include="src\Shapes\Cube.h">
       <Filter>Source Files\src\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\miniaudio.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MusicManager.h">
+      <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
