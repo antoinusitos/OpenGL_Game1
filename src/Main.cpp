@@ -52,7 +52,7 @@ int main()
 		return -1;
 	}
 
-	game.Init();
+	game.Run();
 }
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly

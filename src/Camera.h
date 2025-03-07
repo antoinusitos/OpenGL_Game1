@@ -62,11 +62,6 @@ private:
 	const float FOVMIN = 1.0f;
 	const float FOVMAX = 90.0f;
 
-	const int xMin = -1;
-	const int xMax = 1;
-	const int zMin = -10;
-	const int zMax = 0;
-
 	bool canMove = true;
 	const float timeToMove = 0.15f;
 	float currentTime = 0.0f;

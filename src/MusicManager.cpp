@@ -20,5 +20,10 @@ void MusicManager::PlaySound(const char* soundPath)
 		return;
 	}
 
+	if (muted)
+	{
+		return;
+	}
+
 	ma_engine_play_sound(&engine, soundPath, NULL);
 }

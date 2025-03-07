@@ -22,5 +22,7 @@ private:
     ma_engine engine;
 
     bool initialized = false;
+
+    bool muted = true;
 };
 

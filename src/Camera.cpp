@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include "MusicManager.h"
+#include "WorldManager.h"
 
 // constructor with vectors
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Fov(FOV)
@@ -93,19 +94,19 @@ bool Camera::AllowToMove(glm::vec3 newPos)
     glm::vec3 finalPos = Position + newPos;
     if (newPos.x > 0.0f)
     {
-        return finalPos.x <= xMax;
+        return finalPos.x <= WorldManager::GetInstance().xMax;
     }
     else if (newPos.x < 0.0f)
     {
-        return finalPos.x >= xMin;
+        return finalPos.x >= WorldManager::GetInstance().xMin;
     }
     else if (newPos.z < 0.0f)
     {
-        return finalPos.z >= zMin;
+        return finalPos.z >= WorldManager::GetInstance().zMin;
     }
     else if (newPos.z > 0.0f)
     {
-        return finalPos.z <= zMax;
+        return finalPos.z <= WorldManager::GetInstance().zMax;
     }
 
     return false;
