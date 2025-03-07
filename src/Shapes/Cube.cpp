@@ -75,7 +75,7 @@ Cube::Cube(glm::vec3 positionIn, const char* texture)
 
 	// texture 1
 	// ---------
-	glGenTextures(1, &texture1);
+	/*glGenTextures(1, &texture1);
 	glBindTexture(GL_TEXTURE_2D, texture1);
 	// set the texture wrapping parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -84,9 +84,9 @@ Cube::Cube(glm::vec3 positionIn, const char* texture)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// load image, create texture and generate mipmaps
-	int width, height, nrChannels;
+	int width, height, nrChannels;*/
 	//stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-	ResourceLoader::GetInstance().GetTexture(texture, width, height, nrChannels);
+	texture1 = ResourceLoader::GetInstance().GetTexture(texture, width, height, nrChannels);
 }
 
 void Cube::Render(Shader* ourShader, Camera* camera)
