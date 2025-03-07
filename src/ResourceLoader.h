@@ -8,7 +8,7 @@ struct Texture2D
     int width;
     int height;
     int nrChannels;
-    unsigned int* id;
+    unsigned int id;
 };
 
 class ResourceLoader
@@ -22,7 +22,7 @@ public:
     }
 
 public:
-    unsigned int* GetTexture(const char* texture, int& inWidth, int& inHeight, int& inNrChannels);
+    unsigned int GetTexture(const char* texture, int& inWidth, int& inHeight, int& inNrChannels);
 
     void Free();
 
