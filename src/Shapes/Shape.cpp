@@ -1,7 +1,5 @@
-#pragma once
-
-class Camera;
-class Shader;
+#include "../Camera.h"
+#include "../Shader.h"
 
 class Shape
 {

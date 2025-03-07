@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+#define STB_IMAGE_IMPLEMENTATION
 #include "utilities/stb_image.h"
 
 #include <iostream>

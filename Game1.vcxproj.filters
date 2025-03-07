@@ -36,6 +36,30 @@
     <ClCompile Include="src\MusicManager.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\LevelManager.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorldManager.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shapes\Cube.cpp">
+      <Filter>Source Files\src\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shapes\Plane.cpp">
+      <Filter>Source Files\src\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shapes\Shape.cpp">
+      <Filter>Source Files\src\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\3.3.coordinate_system.fs">
@@ -64,9 +88,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Utilities\Shader_s.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>Source Files\src</Filter>
     </ClInclude>
@@ -86,6 +107,18 @@
       <Filter>Source Files\src</Filter>
     </ClInclude>
     <ClInclude Include="src\MusicManager.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LevelManager.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorldManager.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
       <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>
