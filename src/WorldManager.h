@@ -25,10 +25,10 @@ public:
 
     void Render(Shader* ourShader, Camera* camera);
 
-    const int xMin = -3;
-    const int xMax = 3;
-    const int zMin = -10;
-    const int zMax = 0;
+    int xMin = -3;
+    int xMax = 3;
+    int zMin = -10;
+    int zMax = 0;
 
 private:
     std::list<Shape*> shapes;

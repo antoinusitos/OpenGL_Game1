@@ -13,16 +13,20 @@ void ResourceLoader::GetTexture(const char* texture, int& inWidth, int& inHeight
 	auto foundTexture = textures.find(texture);
 	if (foundTexture != textures.end())
 	{
+		std::cout << "found Texture:" << texture << std::endl;
 		inWidth = foundTexture->second.width;
 		inHeight = foundTexture->second.height;
 		inNrChannels = foundTexture->second.nrChannels;
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, inWidth, inHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, foundTexture->second.data);
 		glGenerateMipmap(GL_TEXTURE_2D);
+		return;
 	}
 
-	unsigned char* data = stbi_load(texture, &inWidth, &inHeight, &inNrChannels, 0);
+	std::string tex = "Textures/" + std::string(texture) + ".png";
+	unsigned char* data = stbi_load(tex.c_str(), &inWidth, &inHeight, &inNrChannels, 0);
 	if (data)
 	{
+		std::cout << "LOADED Texture:" << texture << std::endl;
 		textures.insert({ texture, Texture2D { data, inWidth, inHeight, inNrChannels }});
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, inWidth, inHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);

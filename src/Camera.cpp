@@ -91,22 +91,24 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 
 bool Camera::AllowToMove(glm::vec3 newPos)
 {
+    WorldManager worldManager = WorldManager::GetInstance();
+
     glm::vec3 finalPos = Position + newPos;
     if (newPos.x > 0.0f)
     {
-        return finalPos.x <= WorldManager::GetInstance().xMax;
+        return finalPos.x <= worldManager.xMax;
     }
     else if (newPos.x < 0.0f)
     {
-        return finalPos.x >= WorldManager::GetInstance().xMin;
+        return finalPos.x >= worldManager.xMin;
     }
     else if (newPos.z < 0.0f)
     {
-        return finalPos.z >= WorldManager::GetInstance().zMin;
+        return finalPos.z >= worldManager.zMin;
     }
     else if (newPos.z > 0.0f)
     {
-        return finalPos.z <= WorldManager::GetInstance().zMax;
+        return finalPos.z <= worldManager.zMax;
     }
 
     return false;

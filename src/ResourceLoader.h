@@ -8,7 +8,6 @@ struct Texture2D
     int width;
     int height;
     int nrChannels;
-
 };
 
 class ResourceLoader
