@@ -1,7 +1,10 @@
 #include "Camera.h"
 
+#include "Entity.h"
 #include "MusicManager.h"
 #include "WorldManager.h"
+
+#include <iostream>
 
 // constructor with vectors
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Fov(FOV)
@@ -94,7 +97,22 @@ bool Camera::AllowToMove(glm::vec3 newPos)
     WorldManager worldManager = WorldManager::GetInstance();
 
     glm::vec3 finalPos = Position + newPos;
-    if (newPos.x > 0.0f)
+    Entity* cell = WorldManager::GetInstance().GetEntityAt(finalPos.x, finalPos.z);
+
+    if (!cell)
+    {
+        std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " no such cell available" << std::endl;
+        return false;
+    }
+    else if (cell && cell->child)
+    {
+        std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " obstacle detected" << std::endl;
+        return false;
+    }
+
+    return true;
+
+   /* if (newPos.x > 0.0f)
     {
         return finalPos.x <= worldManager.xMax;
     }
@@ -111,7 +129,7 @@ bool Camera::AllowToMove(glm::vec3 newPos)
         return finalPos.z <= worldManager.zMax;
     }
 
-    return false;
+    return false;*/
 }
 
 // processes input received from a mouse input system. Expects the offset value in both the x and y direction.

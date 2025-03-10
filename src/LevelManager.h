@@ -13,6 +13,6 @@ public:
 public:
     LevelManager();
 
-	void LoadLevel(const char* levelName);
+	void LoadLevel(const char* levelName, const char* levelPropsName, bool loadingLands = true);
 };
 

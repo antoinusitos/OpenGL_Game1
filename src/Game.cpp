@@ -32,9 +32,10 @@ void Game::Run()
 	// ------------------------------------
 	ourShader = new Shader("src/3.3.coordinate_system.vs", "src/3.3.coordinate_system.fs");
 
-	LevelManager::GetInstance().LoadLevel("LVL.txt");
+	LevelManager::GetInstance().LoadLevel("LVL.txt", "LVL_PROPS.txt", true);
 
-	camera = new Camera(glm::vec3(0.0f, 0.0f, 0.0f));
+	camera = new Camera(glm::vec3(3.0f, 0.0f, 0.0f));
+	camera->Yaw = 90;
 
 	// tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
 	// -------------------------------------------------------------------------------------------
@@ -116,7 +117,7 @@ void Game::processInput(GLFWwindow* window)
 		camera->ProcessKeyboard(FORWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		camera->ProcessKeyboard(BACKWARD, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) 
 		camera->ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera->ProcessKeyboard(RIGHT, deltaTime);
