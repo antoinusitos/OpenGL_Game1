@@ -2,9 +2,6 @@
 
 #include "Shape.h"
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-
 class Camera;
 class Shader;
 
@@ -55,14 +52,12 @@ static float vertices[] = {
 class Cube : public Shape
 {
 public:
-	glm::vec3 position;
-
 	unsigned int VBO, VAO;
 	unsigned int texture1;
 
-	Cube(glm::vec3 positionIn, const char* texture);
+	Cube(const char* texture);
 
-	void Render(Shader* ourShader, Camera* camera) override;
+	void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn) override;
 
 	void Free() override;
 };

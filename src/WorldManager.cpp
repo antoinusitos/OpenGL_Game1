@@ -1,8 +1,8 @@
 #include "WorldManager.h"
 
 #include "Camera.h"
+#include "Entity.h"
 #include "Shader.h"
-#include "Shapes/Shape.h"
 
 #include <iostream>
 
@@ -11,20 +11,20 @@ WorldManager::WorldManager()
 
 }
 
-void WorldManager::AddShape(Shape* newShape)
+void WorldManager::AddEntity(Entity* newEntity)
 {
-	shapes.push_back(newShape);
+	entities.push_back(newEntity);
 }
 
-const std::list<Shape*> WorldManager::GetShapes() const
+const std::list<Entity*> WorldManager::GetEntities() const
 {
-	return shapes;
+	return entities;
 }
 
 void WorldManager::Render(Shader* ourShader, Camera* camera)
 {
-	for (Shape* singleShape : WorldManager::GetInstance().GetShapes())
+	for (Entity* singleEntity: entities)
 	{
-		singleShape->Render(ourShader, camera);
+		singleEntity->Render(ourShader, camera);
 	}
 }

@@ -8,15 +8,11 @@
 
 #include <iostream>
 
-unsigned int ResourceLoader::GetTexture(const char* texture, int& inWidth, int& inHeight, int& inNrChannels)
+unsigned int ResourceLoader::GetTexture(const char* texture)
 {
 	auto foundTexture = textures.find(texture);
 	if (foundTexture != textures.end())
 	{
-		std::cout << "found Texture:" << texture << std::endl;
-		inWidth = foundTexture->second.width;
-		inHeight = foundTexture->second.height;
-		inNrChannels = foundTexture->second.nrChannels;
 		return foundTexture->second.id;
 	}
 	unsigned int texture1;
@@ -33,13 +29,13 @@ unsigned int ResourceLoader::GetTexture(const char* texture, int& inWidth, int& 
 	int width, height, nrChannels;
 	
 	std::string tex = "Textures/" + std::string(texture) + ".png";
-	unsigned char* data = stbi_load(tex.c_str(), &inWidth, &inHeight, &inNrChannels, 0);
+	unsigned char* data = stbi_load(tex.c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		std::cout << "LOADED Texture:" << texture << std::endl;
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, inWidth, inHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
-		textures.insert({ texture, Texture2D { data, inWidth, inHeight, inNrChannels, texture1 }});
+		textures.insert({ texture, Texture2D { data, width, height, nrChannels, texture1 }});
 		return texture1;
 	}
 	else
@@ -47,6 +43,28 @@ unsigned int ResourceLoader::GetTexture(const char* texture, int& inWidth, int& 
 		std::cout << "Failed to load texture:" << texture << std::endl;
 		return texture1;
 	}
+}
+
+const bool ResourceLoader::HasShape(const char* shape) const
+{
+	auto foundShape = shapes.find(shape);
+	if (foundShape != shapes.end())
+	{
+		return true;
+	}
+	return false;
+}
+
+void ResourceLoader::RegisterShape(const char* shape, unsigned int vao, unsigned int vbo)
+{
+	std::cout << "Register shape:" << shape << std::endl;
+	shapes.insert({shape, ShapeInfo{vao, vbo}});
+}
+
+unsigned int ResourceLoader::GetShape(const char* shape) const
+{
+	auto foundShape = shapes.find(shape);
+	return foundShape->second.VAO;
 }
 
 void ResourceLoader::Free()

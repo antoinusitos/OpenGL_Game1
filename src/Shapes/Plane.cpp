@@ -26,7 +26,6 @@ Plane::Plane(glm::vec3 positionIn, const char* texture, bool flip, bool billboar
 		1, 2, 3   // second Triangle
 	};
 
-	position = positionIn;
 	flipped = flip;
 	scale = inScale;
 
@@ -51,30 +50,20 @@ Plane::Plane(glm::vec3 positionIn, const char* texture, bool flip, bool billboar
 
 	// texture 1
 	// ---------
-	/*glGenTextures(1, &texture1);
-	glBindTexture(GL_TEXTURE_2D, texture1);
-	// set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_FILL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_FILL);
-	// set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// load image, create texture and generate mipmaps
-	int width, height, nrChannels;*/
 	stbi_set_flip_vertically_on_load(flipped); // tell stb_image.h to flip loaded texture's on the y-axis.
-	texture1 = ResourceLoader::GetInstance().GetTexture(texture, width, height, nrChannels);
+	texture1 = ResourceLoader::GetInstance().GetTexture(texture);
 }
 
-void Plane::Render(Shader* ourShader, Camera* camera)
+void Plane::Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn)
 {
 	// bind textures on corresponding texture units
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
 
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, position);
-	glm::vec3 forward = camera->Position - position;
-	model = glm::inverse(glm::lookAt(position, camera->Position, glm::vec3(0.0f, 1.0f, 0.0f)));
+	model = glm::translate(model, positionIn);
+	glm::vec3 forward = camera->Position - positionIn;
+	model = glm::inverse(glm::lookAt(positionIn, camera->Position, glm::vec3(0.0f, 1.0f, 0.0f)));
 	model = glm::scale(model, glm::vec3(scale));
 	ourShader->setMat4("model", model);
 

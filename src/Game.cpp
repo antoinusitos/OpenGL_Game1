@@ -8,10 +8,10 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
+#include "Entity.h"
 #include "LevelManager.h"
 #include "MusicManager.h"
 #include "ResourceLoader.h"
-#include "Shapes/Shape.h"
 #include "Shader.h"
 #include "WorldManager.h"
 
@@ -85,9 +85,9 @@ void Game::Run()
 
 	// optional: de-allocate all resources once they've outlived their purpose:
 	// ------------------------------------------------------------------------
-	for (Shape* singleShape : WorldManager::GetInstance().GetShapes())
+	for (Entity* singleEntity : WorldManager::GetInstance().GetEntities())
 	{
-		singleShape->Free();
+		singleEntity->Free();
 	}
 
 	delete ourShader;

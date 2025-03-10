@@ -11,6 +11,12 @@ struct Texture2D
     unsigned int id;
 };
 
+struct ShapeInfo
+{
+    unsigned int VBO;
+    unsigned int VAO;
+};
+
 class ResourceLoader
 {
 public:
@@ -22,12 +28,17 @@ public:
     }
 
 public:
-    unsigned int GetTexture(const char* texture, int& inWidth, int& inHeight, int& inNrChannels);
+    unsigned int GetTexture(const char* texture);
+
+    const bool HasShape(const char* shape) const;
+    void RegisterShape(const char* shape, unsigned int vao, unsigned int vbo);
+    unsigned int GetShape(const char* shape) const;
 
     void Free();
 
 private:
 
-	std::map<const char*, Texture2D> textures;
+    std::map<const char*, Texture2D> textures;
+    std::map<const char*, ShapeInfo> shapes;
 };
 

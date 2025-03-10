@@ -1,5 +1,6 @@
 #include "LevelManager.h"
 
+#include "Entity.h"
 #include "Shapes/Cube.h"
 #include "Shapes/Plane.h"
 #include "WorldManager.h"
@@ -36,7 +37,11 @@ void LevelManager::LoadLevel()
 	{
 		for (int j = 0; j < sizeZ; j++)
 		{
-			WorldManager::GetInstance().AddShape(new Cube(glm::vec3(i - (sizeX / 2), -1.5f, -j), texture.c_str()));
+			Cube* cube = new Cube(texture.c_str());
+			Entity* entity = new Entity(glm::vec3(i - (sizeX / 2), -1.5f, -j));
+			entity->shape = cube;
+			WorldManager::GetInstance().AddEntity(entity);
+			//WorldManager::GetInstance().AddShape(new Cube(texture.c_str()));
 			//std::cout << "Loaded :" << (i * sizeZ + j) << "/" << (sizeX * sizeZ) << std::endl;
 
 			if (i - (sizeX / 2) < minX)
@@ -67,7 +72,7 @@ void LevelManager::LoadLevel()
 
 	return;
 
-	while (std::getline(file, str))
+	/*while (std::getline(file, str))
 	{
 		if (str.find("//") != std::string::npos || str.empty())
 		{
@@ -113,14 +118,14 @@ void LevelManager::LoadLevel()
 		if (type == "Cube")
 		{
 			std::string texture = "Textures/" + str + ".png";
-			newShape = new Cube(glm::vec3(x, y, z), texture.c_str());
+			//newShape = new Cube(glm::vec3(x, y, z), texture.c_str());
 		}
 		else if (type == "Plane")
 		{
 			std::string texture = "Textures/" + str + ".png";
-			newShape = new Plane(glm::vec3(x, y, z), texture.c_str(), true, true, std::stof(scale));
+			//newShape = new Plane(glm::vec3(x, y, z), texture.c_str(), true, true, std::stof(scale));
 		}
 
 		WorldManager::GetInstance().AddShape(newShape);
-	}
+	}*/
 }

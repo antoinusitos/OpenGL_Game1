@@ -60,6 +60,9 @@
     <ClCompile Include="src\Shapes\Shape.cpp">
       <Filter>Source Files\src\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\3.3.coordinate_system.fs">
@@ -119,6 +122,9 @@
       <Filter>Source Files\src</Filter>
     </ClInclude>
     <ClInclude Include="src\Shader.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.h">
       <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,8 +3,8 @@
 #include <list>
 
 class Camera;
+class Entity;
 class Shader;
-class Shape;
 
 class WorldManager
 {
@@ -19,9 +19,9 @@ public:
 public:
     WorldManager();
 
-    void AddShape(Shape* newShape);
+    void AddEntity(Entity* newEntity);
 
-    const std::list<Shape*> GetShapes() const;
+    const std::list<Entity*> GetEntities() const;
 
     void Render(Shader* ourShader, Camera* camera);
 
@@ -31,6 +31,6 @@ public:
     int zMax = 0;
 
 private:
-    std::list<Shape*> shapes;
+    std::list<Entity*> entities;
 };
 
