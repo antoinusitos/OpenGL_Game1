@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-Plane::Plane(glm::vec3 positionIn, const char* texture, bool flip, bool billboard , float inScale)
+Plane::Plane(const char* texture, bool flip, bool billboard , float inScale)
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------

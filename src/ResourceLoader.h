@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <string>
 
 struct Texture2D
 {
@@ -38,7 +39,7 @@ public:
 
 private:
 
-    std::map<const char*, Texture2D> textures;
-    std::map<const char*, ShapeInfo> shapes;
+    std::map<std::string, Texture2D> textures;
+    std::map<std::string, ShapeInfo> shapes;
 };
 

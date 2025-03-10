@@ -17,7 +17,7 @@ unsigned int ResourceLoader::GetTexture(const char* texture)
 	}
 	unsigned int texture1;
 
-        glGenTextures(1, &texture1);
+    glGenTextures(1, &texture1);
 	glBindTexture(GL_TEXTURE_2D, texture1);
 	// set the texture wrapping parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -35,7 +35,7 @@ unsigned int ResourceLoader::GetTexture(const char* texture)
 		std::cout << "LOADED Texture:" << texture << std::endl;
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
-		textures.insert({ texture, Texture2D { data, width, height, nrChannels, texture1 }});
+		textures.insert({ std::string(texture), Texture2D { data, width, height, nrChannels, texture1 }});
 		return texture1;
 	}
 	else
@@ -58,7 +58,7 @@ const bool ResourceLoader::HasShape(const char* shape) const
 void ResourceLoader::RegisterShape(const char* shape, unsigned int vao, unsigned int vbo)
 {
 	std::cout << "Register shape:" << shape << std::endl;
-	shapes.insert({shape, ShapeInfo{vao, vbo}});
+	shapes.insert({std::string(shape), ShapeInfo{vao, vbo}});
 }
 
 unsigned int ResourceLoader::GetShape(const char* shape) const

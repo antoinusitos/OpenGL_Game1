@@ -49,6 +49,8 @@ void Game::Run()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
+		//std::cout << "FPS " << (1 / deltaTime) << std::endl;
+
 		camera->Tick(deltaTime);
 
 		// input

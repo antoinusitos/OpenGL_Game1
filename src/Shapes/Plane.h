@@ -15,7 +15,7 @@ public:
 	bool billboarded = true;
 	float scale = 1.0f;
 
-	Plane(glm::vec3 positionIn, const char* texture, bool flip = false, bool billboard = true, float inScale = 1.0f);
+	Plane(const char* texture, bool flip = false, bool billboard = true, float inScale = 1.0f);
 
 	void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn) override;
 
