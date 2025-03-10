@@ -13,7 +13,7 @@ void Entity::Render(Shader* ourShader, Camera* camera)
 {
 	if (shape)
 	{
-		shape->Render(ourShader, camera, position);
+		shape->Render(ourShader, camera, position, rotation);
 	}
 }
 

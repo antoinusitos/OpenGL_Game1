@@ -17,7 +17,7 @@ public:
 
 	Plane(const char* texture, bool flip = false, bool billboard = true, float inScale = 1.0f);
 
-	void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn) override;
+	void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn, glm::vec3 rotationIn) override;
 
 	void Free() override;
 };

@@ -13,6 +13,6 @@ public:
 public:
     LevelManager();
 
-	void LoadLevel();
+	void LoadLevel(const char* levelName);
 };
 

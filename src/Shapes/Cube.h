@@ -57,7 +57,7 @@ public:
 
 	Cube(const char* texture);
 
-	void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn) override;
+	void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn, glm::vec3 rotationIn) override;
 
 	void Free() override;
 };

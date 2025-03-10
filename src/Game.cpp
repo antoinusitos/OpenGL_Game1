@@ -32,7 +32,7 @@ void Game::Run()
 	// ------------------------------------
 	ourShader = new Shader("src/3.3.coordinate_system.vs", "src/3.3.coordinate_system.fs");
 
-	LevelManager::GetInstance().LoadLevel();
+	LevelManager::GetInstance().LoadLevel("LVL.txt");
 
 	camera = new Camera(glm::vec3(0.0f, 0.0f, 0.0f));
 

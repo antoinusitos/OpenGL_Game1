@@ -16,11 +16,11 @@ LevelManager::LevelManager()
 
 //Type:x,y,z:scale:texture
 //Cube:0.0f,-1.50f,0.0f:1.0f:dirt
-void LevelManager::LoadLevel()
+void LevelManager::LoadLevel(const char* levelName)
 {
-	std::ifstream file("LVL.txt");
+	std::ifstream file(levelName);
 	std::string str;
-	std::cout << "Loading LVL.txt...:" << std::endl;
+	std::cout << "Loading " << levelName << " ..." << std::endl;
 
 	while (std::getline(file, str))
 	{
@@ -32,6 +32,9 @@ void LevelManager::LoadLevel()
 		float x = 0.0f;
 		float y = 0.0f;
 		float z = 0.0f;
+		float rotX = 0.0f;
+		float rotY = 0.0f;
+		float rotZ = 0.0f;
 
 		std::string delimiter = ":";
 		std::string token = str.substr(0, str.find(delimiter));
@@ -59,12 +62,36 @@ void LevelManager::LoadLevel()
 		}
 
 		str.erase(0, str.find(delimiter) + delimiter.length());
+		token = str.substr(0, str.find(delimiter));
+
+		std::string rot = token;
+		std::string rotDelimiter = ",";
+		for (int i = 0; i < 3; i++)
+		{
+			std::string rotSingle = rot.substr(0, str.find(rotDelimiter));
+			if (i == 0)
+			{
+				rotX = std::stof(rotSingle);
+			}
+			else if (i == 1)
+			{
+				rotY = std::stof(rotSingle);
+			}
+			else if (i == 2)
+			{
+				rotZ = std::stof(rotSingle);
+			}
+			rot.erase(0, rot.find(rotDelimiter) + rotDelimiter.length());
+		}
+
+		str.erase(0, str.find(delimiter) + delimiter.length());
 
 		std::string scale = str.substr(0, str.find(delimiter));;
 
 		str.erase(0, str.find(delimiter) + delimiter.length());
 
 		Entity* entity = new Entity(glm::vec3(x, y, z));
+		entity->rotation = glm::vec3(rotX, rotY, rotZ);
 
 		Shape* newShape = nullptr;
 		if (type == "Cube")
@@ -73,6 +100,11 @@ void LevelManager::LoadLevel()
 			newShape = new Cube(texture.c_str());
 		}
 		else if (type == "Plane")
+		{
+			std::string texture = str;
+			newShape = new Plane(texture.c_str(), true, false, std::stof(scale));
+		}
+		else if (type == "Billboard")
 		{
 			std::string texture = str;
 			newShape = new Plane(texture.c_str(), true, true, std::stof(scale));

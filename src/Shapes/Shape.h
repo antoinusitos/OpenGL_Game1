@@ -9,7 +9,7 @@ class Shader;
 class Shape
 {
 public:
-	virtual void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn)
+	virtual void Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn, glm::vec3 rotationIn)
 	{
 
 	}

@@ -28,6 +28,7 @@ Plane::Plane(const char* texture, bool flip, bool billboard , float inScale)
 
 	flipped = flip;
 	scale = inScale;
+	billboarded = billboard;
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -54,7 +55,7 @@ Plane::Plane(const char* texture, bool flip, bool billboard , float inScale)
 	texture1 = ResourceLoader::GetInstance().GetTexture(texture);
 }
 
-void Plane::Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn)
+void Plane::Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn, glm::vec3 rotationIn)
 {
 	// bind textures on corresponding texture units
 	glActiveTexture(GL_TEXTURE0);
@@ -62,8 +63,14 @@ void Plane::Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn)
 
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, positionIn);
-	glm::vec3 forward = camera->Position - positionIn;
-	model = glm::inverse(glm::lookAt(positionIn, camera->Position, glm::vec3(0.0f, 1.0f, 0.0f)));
+	if (billboarded)
+	{
+		model = glm::inverse(glm::lookAt(positionIn, camera->Position, glm::vec3(0.0f, 1.0f, 0.0f)));
+	}
+	model = glm::rotate(model, glm::radians(rotationIn.x), glm::vec3(1.0, 0.0, 0.0));
+	model = glm::rotate(model, glm::radians(rotationIn.y), glm::vec3(0.0, 1.0, 0.0));
+	model = glm::rotate(model, glm::radians(rotationIn.z), glm::vec3(0.0, 0.0, 1.0));
+
 	model = glm::scale(model, glm::vec3(scale));
 	ourShader->setMat4("model", model);
 
