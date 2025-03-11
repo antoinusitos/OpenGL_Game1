@@ -127,6 +127,11 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 
 		std::string entityType = str.substr(0, str.find(delimiter));
 
+		str.erase(0, str.find(delimiter) + delimiter.length());
+
+		std::string entityName = str.substr(0, str.find(delimiter));
+		entity->entityName = entityName;
+
 		if (entityType == "static")
 		{
 			WorldManager::GetInstance().AddTempCell(entity);
@@ -138,6 +143,7 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 			{
 				retrievedEntity->child = entity;
 				std::cout << "LOG : Attached enviro : " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+				std::cout << "LOG : " << retrievedEntity->entityName << " : " << entity->entityName << std::endl;
 			}
 			else
 			{

@@ -70,14 +70,12 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
         ProcessMouseMovement(-90, 0);
         canMove = false;
         return;
-        movement -= Right;
     }
     if (direction == RIGHT)
     {
         ProcessMouseMovement(90, 0);
         canMove = false;
         return;
-        movement += Right;
     }
 
     movement.x = round(movement.x);
@@ -99,37 +97,20 @@ bool Camera::AllowToMove(glm::vec3 newPos)
     glm::vec3 finalPos = Position + newPos;
     Entity* cell = WorldManager::GetInstance().GetEntityAt(finalPos.x, finalPos.z);
 
+    std::cout << "LOG : move to x:" << finalPos.x << " | z:" << finalPos.z << std::endl;
+
     if (!cell)
     {
         std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " no such cell available" << std::endl;
         return false;
     }
-    else if (cell && cell->child)
+    else if (cell && cell->child != nullptr)
     {
         std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " obstacle detected" << std::endl;
         return false;
     }
 
     return true;
-
-   /* if (newPos.x > 0.0f)
-    {
-        return finalPos.x <= worldManager.xMax;
-    }
-    else if (newPos.x < 0.0f)
-    {
-        return finalPos.x >= worldManager.xMin;
-    }
-    else if (newPos.z < 0.0f)
-    {
-        return finalPos.z >= worldManager.zMin;
-    }
-    else if (newPos.z > 0.0f)
-    {
-        return finalPos.z <= worldManager.zMax;
-    }
-
-    return false;*/
 }
 
 // processes input received from a mouse input system. Expects the offset value in both the x and y direction.

@@ -3,6 +3,8 @@
 #include <glad/glad.h>;
 #include <glm/glm.hpp>;
 
+#include <string>
+
 class Camera;
 class Shader;
 class Shape;
@@ -15,6 +17,8 @@ public:
 	Shape* shape = nullptr;
 
 	Entity* child = nullptr;
+
+	std::string entityName = "";
 
 	glm::vec3 position = glm::vec3(0.0f);
 	glm::vec3 rotation = glm::vec3(0.0f);

@@ -5,6 +5,7 @@
 #include "Shader.h"
 
 #include <iostream>
+#include <string>
 
 WorldManager::WorldManager()
 {
@@ -31,7 +32,8 @@ void WorldManager::FillCells()
 
 void WorldManager::AddCell(int x, int z, Entity* newEntity)
 {
-	cells.insert({ x * zMax + z, newEntity});
+	cells.insert({ z * xMax + x, newEntity});
+	newEntity->entityName = "Cell" + std::to_string(z * xMax + x);
 }
 
 const std::list<Entity*> WorldManager::GetEntities() const
@@ -46,7 +48,7 @@ Entity* WorldManager::GetEntityAt(int x, int z) const
 		return nullptr;
 	}
 
-	auto foundCell = cells.find(x * zMax + z);
+	auto foundCell = cells.find(z * xMax + x);
 	if (foundCell != cells.end())
 	{
 		return foundCell->second;
