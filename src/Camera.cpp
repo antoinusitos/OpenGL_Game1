@@ -57,14 +57,6 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 
     glm::vec3 movement = glm::vec3(0.0f);
 
-    if (direction == FORWARD)
-    {
-        movement += Front;
-    }
-    if (direction == BACKWARD)
-    {
-        movement -= Front;
-    }
     if (direction == LEFT)
     {
         ProcessMouseMovement(-90, 0);
@@ -76,6 +68,14 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
         ProcessMouseMovement(90, 0);
         canMove = false;
         return;
+    }
+    if (direction == FORWARD)
+    {
+        movement += Front;
+    }
+    if (direction == BACKWARD)
+    {
+        movement -= Front;
     }
 
     movement.x = round(movement.x);
@@ -96,8 +96,6 @@ bool Camera::AllowToMove(glm::vec3 newPos)
 
     glm::vec3 finalPos = Position + newPos;
     Entity* cell = WorldManager::GetInstance().GetEntityAt(finalPos.x, finalPos.z);
-
-    std::cout << "LOG : move to x:" << finalPos.x << " | z:" << finalPos.z << std::endl;
 
     if (!cell)
     {

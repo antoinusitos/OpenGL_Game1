@@ -142,8 +142,6 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 			if (retrievedEntity)
 			{
 				retrievedEntity->child = entity;
-				std::cout << "LOG : Attached enviro : " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
-				std::cout << "LOG : " << retrievedEntity->entityName << " : " << entity->entityName << std::endl;
 			}
 			else
 			{
@@ -156,7 +154,6 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 			if (retrievedEntity)
 			{
 				retrievedEntity->child = entity;
-				std::cout << "LOG : Attached dynamic : " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
 			}
 			else
 			{

@@ -32,7 +32,7 @@ void WorldManager::FillCells()
 
 void WorldManager::AddCell(int x, int z, Entity* newEntity)
 {
-	cells.insert({ z * xMax + x, newEntity});
+	cells.insert({ z * (xMax+1) + x, newEntity});
 	newEntity->entityName = "Cell" + std::to_string(z * xMax + x);
 }
 
@@ -48,7 +48,7 @@ Entity* WorldManager::GetEntityAt(int x, int z) const
 		return nullptr;
 	}
 
-	auto foundCell = cells.find(z * xMax + x);
+	auto foundCell = cells.find(z * (xMax + 1) + x);
 	if (foundCell != cells.end())
 	{
 		return foundCell->second;
