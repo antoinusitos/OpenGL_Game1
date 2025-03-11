@@ -1,6 +1,7 @@
 #include "LevelManager.h"
 
 #include "Entity.h"
+#include "Enemy.h"
 #include "Shapes/Cube.h"
 #include "Shapes/Plane.h"
 #include "WorldManager.h"
@@ -101,9 +102,6 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 
 		str.erase(0, str.find(delimiter) + delimiter.length());
 
-		Entity* entity = new Entity(glm::vec3(x, y, z));
-		entity->rotation = glm::vec3(rotX, rotY, rotZ);
-
 		std::string textureToken = str.substr(0, str.find(delimiter));;
 
 		Shape* newShape = nullptr;
@@ -130,14 +128,16 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 		str.erase(0, str.find(delimiter) + delimiter.length());
 
 		std::string entityName = str.substr(0, str.find(delimiter));
-		entity->entityName = entityName;
+		Entity* entity = nullptr;
 
 		if (entityType == "static")
 		{
+			entity = new Entity(glm::vec3(x, y, z));
 			WorldManager::GetInstance().AddTempCell(entity);
 		}
 		else if (entityType == "enviro")
 		{
+			entity = new Entity(glm::vec3(x, y, z));
 			Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
 			if (retrievedEntity)
 			{
@@ -150,6 +150,20 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 		}
 		else if (entityType == "dynamic")
 		{
+			entity = new Entity(glm::vec3(x, y, z));
+			Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
+			if (retrievedEntity)
+			{
+				retrievedEntity->child = entity;
+			}
+			else
+			{
+				std::cout << "ERROR : when adding dynamic " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+			}
+		}
+		else if (entityType == "dynamic")
+		{
+			entity = new Enemy(glm::vec3(x, y, z));
 			Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
 			if (retrievedEntity)
 			{
@@ -161,6 +175,8 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 			}
 		}
 
+		entity->rotation = glm::vec3(rotX, rotY, rotZ);
+		entity->entityName = entityName;
 		entity->shape = newShape;
 		WorldManager::GetInstance().AddEntity(entity);
 	}

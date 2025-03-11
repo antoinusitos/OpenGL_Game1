@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include "Entity.h"
+#include "Enemy.h"
 #include "MusicManager.h"
 #include "WorldManager.h"
 
@@ -104,7 +105,14 @@ bool Camera::AllowToMove(glm::vec3 newPos)
     }
     else if (cell && cell->child != nullptr)
     {
-        std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " obstacle detected" << std::endl;
+        if (static_cast<Enemy*>(cell->child))
+        {
+            std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " Combat starting..." << std::endl;
+        }
+        else
+        {
+            std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " obstacle detected" << std::endl;
+        }
         return false;
     }
 

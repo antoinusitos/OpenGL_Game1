@@ -1,10 +1,10 @@
-#include "PlayerManager.h"
+#include "Enemy.h"
 
 #include <iostream>
 
-PlayerManager::PlayerManager()
+Enemy::Enemy(glm::vec3 positionIn) : Entity(positionIn)
 {
-	pvMax = 99;
+	pvMax = 10;
 	pvCurrent = pvMax;
 
 	attackMax = 7;
@@ -13,7 +13,7 @@ PlayerManager::PlayerManager()
 	defenceMax = 2;
 	defenceCurrent = defenceMax;
 
-	speedMax = 5; // will attack every 0.5 s
+	speedMax = 3; // will attack every 1 - (x/10)  = 0.7 s
 	speedCurrent = speedMax;
 
 	luckMax = 10;
