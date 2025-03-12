@@ -1,5 +1,7 @@
 #include "PlayerManager.h"
 
+#include "TextRendererManager.h"
+
 #include <iostream>
 
 PlayerManager::PlayerManager()
@@ -18,4 +20,10 @@ PlayerManager::PlayerManager()
 
 	luckMax = 10;
 	luckCurrent = luckMax;
+}
+
+void PlayerManager::Tick(float deltaTime)
+{
+	std::string text = "HP: " + std::to_string(pvCurrent) + "/" + std::to_string(pvMax) + "   " + "ATT: " + std::to_string(attackCurrent);
+	TextRendererManager::GetInstance().RenderText(text, 0.0f, 0.0f, 0.75f, glm::vec3(1.0f, 0.0f, 0.0f));
 }

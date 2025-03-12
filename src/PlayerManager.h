@@ -30,5 +30,6 @@ public:
     int luckMax = 0;
     int luckCurrent = 0;
 
+    void Tick(float deltaTime);
 };
 

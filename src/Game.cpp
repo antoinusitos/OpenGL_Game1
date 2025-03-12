@@ -12,8 +12,10 @@
 #include "Entity.h"
 #include "LevelManager.h"
 #include "MusicManager.h"
+#include "PlayerManager.h"
 #include "ResourceLoader.h"
 #include "Shader.h"
+#include "TextRendererManager.h"
 #include "WorldManager.h"
 
 #include <iostream>
@@ -82,6 +84,11 @@ void Game::Run()
 		ourShader->setMat4("projection", projection);
 
 		WorldManager::GetInstance().Render(ourShader, camera);
+
+		PlayerManager::GetInstance().Tick(deltaTime);
+
+		float FPS = (1 / deltaTime);
+		TextRendererManager::GetInstance().RenderText(std::to_string(static_cast<int>(FPS)) + " FPS", 0.0f, 1080.0f - 48, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------

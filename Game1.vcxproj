@@ -113,7 +113,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,6 +149,7 @@
     <ClCompile Include="src\Shapes\Cube.cpp" />
     <ClCompile Include="src\Shapes\Plane.cpp" />
     <ClCompile Include="src\Shapes\Shape.cpp" />
+    <ClCompile Include="src\TextRendererManager.cpp" />
     <ClCompile Include="src\WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,8 @@
     <None Include="src\3.3.texture.vs" />
     <None Include="src\3.3.transform.fs" />
     <None Include="src\3.3.transform.vs" />
+    <None Include="src\3.3Text.fs" />
+    <None Include="src\3.3Text.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Utilities\miniaudio.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="src\Shapes\Cube.h" />
     <ClInclude Include="src\Shapes\Plane.h" />
     <ClInclude Include="src\Shapes\Shape.h" />
+    <ClInclude Include="src\TextRendererManager.h" />
     <ClInclude Include="src\WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

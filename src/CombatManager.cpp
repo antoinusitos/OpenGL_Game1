@@ -2,6 +2,7 @@
 
 #include "Enemy.h"
 #include "PlayerManager.h"
+#include "TextRendererManager.h"
 #include "WorldManager.h"
 
 #include <iostream>
@@ -22,6 +23,8 @@ void CombatManager::Tick(float deltaTime)
 	{
 		return;
 	}
+
+	TextRendererManager::GetInstance().RenderText("IN COMBAT...", 1920.0f / 2.0f, 1080.0f / 2.0f, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 
 	PlayerManager::GetInstance().currentAttackDelay += deltaTime;
 	if (PlayerManager::GetInstance().currentAttackDelay >= 1.0f - PlayerManager::GetInstance().speedCurrent / 10.0f)
