@@ -63,3 +63,14 @@ void WorldManager::Render(Shader* ourShader, Camera* camera)
 		singleEntity->Render(ourShader, camera);
 	}
 }
+
+void WorldManager::RemoveEntity(Entity* entity)
+{
+	Entity* cell = GetEntityAt(entity->position.x, entity->position.z);
+	if (cell)
+	{
+		cell->child = nullptr;
+	}
+	entities.remove(entity);
+	delete entity;
+}

@@ -35,6 +35,8 @@ public:
 
     void Render(Shader* ourShader, Camera* camera);
 
+    void RemoveEntity(Entity* entity);
+
     int xMin = 0;
     int xMax = 6;
     int zMin = 0;

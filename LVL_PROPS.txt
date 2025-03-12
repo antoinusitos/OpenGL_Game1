@@ -1,5 +1,5 @@
 // MONSTERS
-Billboard:3.0f,-0.5f,8.0f:0.0f,0.0f,0.0f:1.0f:skeleton:dynamic:skeleton
+Billboard:3.0f,-0.5f,8.0f:0.0f,0.0f,0.0f:1.0f:skeleton:enemy:skeleton
 
 // TREES
 Billboard:6.0f,0.0f,0.0f:0.0f,0.0f,0.0f:2.0f:tree:enviro:tree1

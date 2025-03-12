@@ -15,20 +15,20 @@ public:
 
     float currentAttackDelay = 0;
 
-    unsigned int pvMax = 0;
-    unsigned int pvCurrent = 0;
+    int pvMax = 0;
+    int pvCurrent = 0;
 
-    unsigned int attackMax = 0;
-    unsigned int attackCurrent = 0;
+    int attackMax = 0;
+    int attackCurrent = 0;
 
-    unsigned int defenceMax = 0;
-    unsigned int defenceCurrent = 0;
+    int defenceMax = 0;
+    int defenceCurrent = 0;
 
-    unsigned int speedMax = 0;
-    unsigned int speedCurrent = 0;
+    int speedMax = 0;
+    int speedCurrent = 0;
 
-    unsigned int luckMax = 0;
-    unsigned int luckCurrent = 0;
+    int luckMax = 0;
+    int luckCurrent = 0;
 
 };
 

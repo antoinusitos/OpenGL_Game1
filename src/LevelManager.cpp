@@ -161,7 +161,7 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 				std::cout << "ERROR : when adding dynamic " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
 			}
 		}
-		else if (entityType == "dynamic")
+		else if (entityType == "enemy")
 		{
 			entity = new Enemy(glm::vec3(x, y, z));
 			Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);

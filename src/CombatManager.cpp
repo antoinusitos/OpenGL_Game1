@@ -2,6 +2,7 @@
 
 #include "Enemy.h"
 #include "PlayerManager.h"
+#include "WorldManager.h"
 
 #include <iostream>
 
@@ -32,6 +33,12 @@ void CombatManager::Tick(float deltaTime)
 		std::cout << "enemy pv:" << currentEnemy->pvCurrent << std::endl;
 
 		PlayerManager::GetInstance().currentAttackDelay = 0.0f;
+		if (currentEnemy->pvCurrent <= 0)
+		{
+			isInCombat = false;
+			WorldManager::GetInstance().RemoveEntity(currentEnemy);
+			return;
+		}
 	}
 	currentEnemy->currentAttackDelay += deltaTime;
 	if (currentEnemy->currentAttackDelay >= 1.0f - currentEnemy->speedCurrent / 10.0f)
