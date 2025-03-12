@@ -3,10 +3,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Shape.h"
+#include "../Camera.h"
 #include "../Shader.h"
 #include "../ResourceLoader.h"
+#include "../MathHelper.h"
 
 #include <iostream>
+#include <numeric>
 
 Cube::Cube(const char* texture)
 {
@@ -88,6 +91,13 @@ Cube::Cube(const char* texture)
 
 void Cube::Render(Shader* ourShader, Camera* camera, glm::vec3 positionIn, glm::vec3 rotationIn)
 {
+	float dot = DotProduct(Normalize(camera->Front), Normalize(positionIn - camera->Position));
+
+	if (dot < 0)
+	{
+		return;
+	}
+
 	// bind textures on corresponding texture units
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);

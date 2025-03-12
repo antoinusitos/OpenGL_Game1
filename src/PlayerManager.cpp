@@ -15,7 +15,7 @@ PlayerManager::PlayerManager()
 	defenceMax = 2;
 	defenceCurrent = defenceMax;
 
-	speedMax = 5; // will attack every 0.5 s
+	speedMax = 2; // will attack every 2 s
 	speedCurrent = speedMax;
 
 	luckMax = 10;

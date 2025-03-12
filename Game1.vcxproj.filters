@@ -157,5 +157,8 @@
     <ClInclude Include="src\TextRendererManager.h">
       <Filter>Source Files\src</Filter>
     </ClInclude>
+    <ClInclude Include="src\MathHelper.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

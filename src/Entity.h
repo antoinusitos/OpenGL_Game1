@@ -9,6 +9,12 @@ class Camera;
 class Shader;
 class Shape;
 
+enum EntityType
+{
+	ENVIRO,
+	ENEMY
+};
+
 class Entity
 {
 public:
@@ -22,6 +28,8 @@ public:
 
 	glm::vec3 position = glm::vec3(0.0f);
 	glm::vec3 rotation = glm::vec3(0.0f);
+
+	EntityType entityType = EntityType::ENVIRO;
 
 	void Render(Shader* ourShader, Camera* camera);
 

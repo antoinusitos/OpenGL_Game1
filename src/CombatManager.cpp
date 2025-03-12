@@ -55,3 +55,8 @@ void CombatManager::Tick(float deltaTime)
 		currentEnemy->currentAttackDelay = 0.0f;
 	}
 }
+
+const bool CombatManager::GetIsInCombat() const
+{
+	return isInCombat;
+}

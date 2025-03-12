@@ -172,6 +172,7 @@
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\LevelManager.h" />
+    <ClInclude Include="src\MathHelper.h" />
     <ClInclude Include="src\MusicManager.h" />
     <ClInclude Include="src\PlayerManager.h" />
     <ClInclude Include="src\ResourceLoader.h" />

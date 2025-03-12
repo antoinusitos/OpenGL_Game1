@@ -4,6 +4,8 @@
 
 Enemy::Enemy(glm::vec3 positionIn) : Entity(positionIn)
 {
+	entityType = EntityType::ENEMY;
+
 	pvMax = 10;
 	pvCurrent = pvMax;
 
@@ -13,7 +15,7 @@ Enemy::Enemy(glm::vec3 positionIn) : Entity(positionIn)
 	defenceMax = 2;
 	defenceCurrent = defenceMax;
 
-	speedMax = 3; // will attack every 1 - (x/10)  = 0.7 s
+	speedMax = 2.5f; // will attack every 2 s
 	speedCurrent = speedMax;
 
 	luckMax = 10;

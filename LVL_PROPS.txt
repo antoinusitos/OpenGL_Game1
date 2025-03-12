@@ -30,3 +30,18 @@ Billboard:2.0f,0.0f,11.0f:0.0f,0.0f,0.0f:2.0f:tree:enviro:tree25
 Billboard:4.0f,0.0f,11.0f:0.0f,0.0f,0.0f:2.0f:tree:enviro:tree26
 Billboard:5.0f,0.0f,11.0f:0.0f,0.0f,0.0f:2.0f:tree:enviro:tree27
 Billboard:6.0f,0.0f,11.0f:0.0f,0.0f,0.0f:2.0f:tree:enviro:tree28
+
+// WALLS
+Cube:0.0f,-0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:1.0f,-0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:2.0f,-0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:4.0f,-0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:5.0f,-0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:6.0f,-0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:0.0f,0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:1.0f,0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:2.0f,0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:3.0f,0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:4.0f,0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:5.0f,0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1
+Cube:6.0f,0.5f,14.0f:0.0f,0.0f,0.0f:2.0f:brickwall:enviro:wall1

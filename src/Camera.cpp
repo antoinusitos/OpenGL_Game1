@@ -52,7 +52,7 @@ glm::mat4 Camera::GetViewMatrix()
 // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
 void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 {
-    if (!canMove)
+    if (!canMove || CombatManager::GetInstance().GetIsInCombat())
     {
         return;
     }
@@ -88,7 +88,7 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
         MusicManager::GetInstance().PlaySound("Sounds/Footstep.wav");
         Position += movement;
         canMove = false;
-        Position.y = 0;
+        Position.y = -0.25f;
     }
 }
 
@@ -106,10 +106,10 @@ bool Camera::AllowToMove(glm::vec3 newPos)
     }
     else if (cell && cell->child != nullptr)
     {
-        if (Enemy* enemy = static_cast<Enemy*>(cell->child))
+        if (cell->child->entityType == EntityType::ENEMY)
         {
             std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " Combat starting..." << std::endl;
-            CombatManager::GetInstance().StartCombat(enemy);
+            CombatManager::GetInstance().StartCombat(static_cast<Enemy*>(cell->child));
         }
         else
         {

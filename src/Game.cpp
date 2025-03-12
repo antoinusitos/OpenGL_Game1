@@ -37,7 +37,7 @@ void Game::Run()
 
 	LevelManager::GetInstance().LoadLevel("LVL.txt", "LVL_PROPS.txt", true);
 
-	camera = new Camera(glm::vec3(3.0f, 0.0f, 0.0f));
+	camera = new Camera(glm::vec3(3.0f, -0.25f, 0.0f));
 	camera->Yaw = 90;
 
 	// tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
@@ -89,6 +89,8 @@ void Game::Run()
 
 		float FPS = (1 / deltaTime);
 		TextRendererManager::GetInstance().RenderText(std::to_string(static_cast<int>(FPS)) + " FPS", 0.0f, 1080.0f - 48, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+
+		TextRendererManager::GetInstance().RenderTexts();
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------

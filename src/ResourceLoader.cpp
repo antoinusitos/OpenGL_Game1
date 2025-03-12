@@ -33,7 +33,16 @@ unsigned int ResourceLoader::GetTexture(const char* texture)
 	if (data)
 	{
 		std::cout << "LOADED Texture:" << texture << std::endl;
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		
+		if (nrChannels < 4)
+		{
+			std::cout << "ERROR : Texture " << texture << " Has less than 4 channels" << std::endl;
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		}
+		else
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		}
 		glGenerateMipmap(GL_TEXTURE_2D);
 		textures.insert({ std::string(texture), Texture2D { data, width, height, nrChannels, texture1 }});
 		return texture1;

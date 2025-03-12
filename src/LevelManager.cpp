@@ -138,40 +138,49 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 		else if (entityType == "enviro")
 		{
 			entity = new Entity(glm::vec3(x, y, z));
-			Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
-			if (retrievedEntity)
+			if(y < 0)
 			{
-				retrievedEntity->child = entity;
-			}
-			else
-			{
-				std::cout << "ERROR : when adding enviro " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+				Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
+				if (retrievedEntity)
+				{
+					retrievedEntity->child = entity;
+				}
+				else
+				{
+					std::cout << "ERROR : when adding enviro " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+				}
 			}
 		}
 		else if (entityType == "dynamic")
 		{
 			entity = new Entity(glm::vec3(x, y, z));
-			Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
-			if (retrievedEntity)
+			if (y < 0)
 			{
-				retrievedEntity->child = entity;
-			}
-			else
-			{
-				std::cout << "ERROR : when adding dynamic " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+				Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
+				if (retrievedEntity)
+				{
+					retrievedEntity->child = entity;
+				}
+				else
+				{
+					std::cout << "ERROR : when adding dynamic " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+				}
 			}
 		}
 		else if (entityType == "enemy")
 		{
 			entity = new Enemy(glm::vec3(x, y, z));
-			Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
-			if (retrievedEntity)
+			if (y < 0)
 			{
-				retrievedEntity->child = entity;
-			}
-			else
-			{
-				std::cout << "ERROR : when adding dynamic " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+				Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
+				if (retrievedEntity)
+				{
+					retrievedEntity->child = entity;
+				}
+				else
+				{
+					std::cout << "ERROR : when adding dynamic " << textureToken << " at x:" << x << " | y:" << y << " | z:" << z << std::endl;
+				}
 			}
 		}
 

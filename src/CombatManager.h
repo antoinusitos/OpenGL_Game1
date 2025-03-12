@@ -19,6 +19,8 @@ public:
 
     void Tick(float deltaTime);
 
+    const bool GetIsInCombat() const;
+
 private:
     bool isInCombat = false;
 
