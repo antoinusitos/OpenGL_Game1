@@ -13,7 +13,8 @@ public:
 public:
     PlayerManager();
 
-private:
+    float currentAttackDelay = 0;
+
     unsigned int pvMax = 0;
     unsigned int pvCurrent = 0;
 

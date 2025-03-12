@@ -9,7 +9,9 @@ public:
 public:
     Enemy(glm::vec3 positionIn);
 
-private:
+public:
+    float currentAttackDelay = 0;
+
     unsigned int pvMax = 0;
     unsigned int pvCurrent = 0;
 

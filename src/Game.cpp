@@ -8,6 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Camera.h"
+#include "CombatManager.h"
 #include "Entity.h"
 #include "LevelManager.h"
 #include "MusicManager.h"
@@ -51,6 +52,8 @@ void Game::Run()
 		lastFrame = currentFrame;
 
 		//std::cout << "FPS " << (1 / deltaTime) << std::endl;
+
+		CombatManager::GetInstance().Tick(deltaTime);
 
 		camera->Tick(deltaTime);
 

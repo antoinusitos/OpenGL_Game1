@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+#include "CombatManager.h"
 #include "Entity.h"
 #include "Enemy.h"
 #include "MusicManager.h"
@@ -105,9 +106,10 @@ bool Camera::AllowToMove(glm::vec3 newPos)
     }
     else if (cell && cell->child != nullptr)
     {
-        if (static_cast<Enemy*>(cell->child))
+        if (Enemy* enemy = static_cast<Enemy*>(cell->child))
         {
             std::cout << "LOG : Cannot travel to x:" << finalPos.x << " | z:" << finalPos.z << " Combat starting..." << std::endl;
+            CombatManager::GetInstance().StartCombat(enemy);
         }
         else
         {
