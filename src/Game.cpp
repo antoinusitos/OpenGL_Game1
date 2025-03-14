@@ -15,6 +15,7 @@
 #include "PlayerManager.h"
 #include "ResourceLoader.h"
 #include "Shader.h"
+#include "StatsManager.h"
 #include "TextRendererManager.h"
 #include "WorldManager.h"
 
@@ -49,19 +50,26 @@ void Game::Run()
 	// -----------
 	while (!glfwWindowShouldClose(window))
 	{
+		StatsManager::GetInstance().StartRecord("Frame");
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
 		//std::cout << "FPS " << (1 / deltaTime) << std::endl;
 
+		StatsManager::GetInstance().StartRecord("CombatManager::Tick");
 		CombatManager::GetInstance().Tick(deltaTime);
+		StatsManager::GetInstance().EndRecord("CombatManager::Tick");
 
+		StatsManager::GetInstance().StartRecord("Camera::Tick");
 		camera->Tick(deltaTime);
+		StatsManager::GetInstance().EndRecord("Camera::Tick");
 
 		// input
 		// -----
+		StatsManager::GetInstance().StartRecord("ProcessInput");
 		processInput(window);
+		StatsManager::GetInstance().EndRecord("ProcessInput");
 
 		// render
 		// ------
@@ -78,24 +86,39 @@ void Game::Run()
 
 		// create transformations
 		// view = camera position
+		StatsManager::GetInstance().StartRecord("ShaderView");
 		ourShader->setMat4("view", camera->GetViewMatrix());
+		StatsManager::GetInstance().EndRecord("ShaderView");
 		// projection = Camera info (fov, near, far)
+		StatsManager::GetInstance().StartRecord("Projection");
 		glm::mat4 projection = glm::perspective(glm::radians(camera->Fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		StatsManager::GetInstance().EndRecord("Projection");
 		ourShader->setMat4("projection", projection);
 
+		StatsManager::GetInstance().StartRecord("WorldRender");
 		WorldManager::GetInstance().Render(ourShader, camera);
+		StatsManager::GetInstance().EndRecord("WorldRender");
 
 		PlayerManager::GetInstance().Tick(deltaTime);
 
+		StatsManager::GetInstance().StartRecord("TextRender");
 		float FPS = (1 / deltaTime);
-		TextRendererManager::GetInstance().RenderText(std::to_string(static_cast<int>(FPS)) + " FPS", 0.0f, 1080.0f - 48, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+		TextRendererManager::GetInstance().RenderText(std::to_string(static_cast<int>(FPS)) + " FPS", 1920.0f - 150, 1080.0f - 48, 0.75f, glm::vec3(1.0f, 0.0f, 0.0f));
+		TextRendererManager::GetInstance().RenderText(std::to_string(((glfwGetTime() - currentFrame) * 1000.0f)) + " ms", 1920.0f - 150, 1080.0f - 48 * 2, 0.75f, glm::vec3(1.0f, 0.0f, 0.0f));
 
 		TextRendererManager::GetInstance().RenderTexts();
+		StatsManager::GetInstance().EndRecord("TextRender");
 
+		StatsManager::GetInstance().StartRecord("SwapBuffers");
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		StatsManager::GetInstance().EndRecord("SwapBuffers");
+
+		StatsManager::GetInstance().EndRecord("Frame");
+
+		//std::cout << "Render Time :" << ((glfwGetTime() - currentFrame) * 1000.0f) << std::endl;
 	}
 
 	// optional: de-allocate all resources once they've outlived their purpose:

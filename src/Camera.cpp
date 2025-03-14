@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Enemy.h"
 #include "MusicManager.h"
+#include "TextRendererManager.h"
 #include "WorldManager.h"
 
 #include <iostream>
@@ -31,6 +32,9 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float u
 void Camera::Tick(float deltaTime)
 {
     updateCameraVectors();
+
+    std::string text = "POS: " + std::to_string(Position.x) + " | " + std::to_string(Position.y) + " | " + std::to_string(Position.z);
+    TextRendererManager::GetInstance().RenderText(text, 0.0f, 1080.0f - 48, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f));
 
     if (!canMove)
     {

@@ -149,6 +149,7 @@
     <ClCompile Include="src\Shapes\Cube.cpp" />
     <ClCompile Include="src\Shapes\Plane.cpp" />
     <ClCompile Include="src\Shapes\Shape.cpp" />
+    <ClCompile Include="src\StatsManager.cpp" />
     <ClCompile Include="src\TextRendererManager.cpp" />
     <ClCompile Include="src\WorldManager.cpp" />
   </ItemGroup>
@@ -180,6 +181,7 @@
     <ClInclude Include="src\Shapes\Cube.h" />
     <ClInclude Include="src\Shapes\Plane.h" />
     <ClInclude Include="src\Shapes\Shape.h" />
+    <ClInclude Include="src\StatsManager.h" />
     <ClInclude Include="src\TextRendererManager.h" />
     <ClInclude Include="src\WorldManager.h" />
   </ItemGroup>
