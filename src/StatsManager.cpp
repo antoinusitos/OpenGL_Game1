@@ -3,6 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "TimeManager.h"
+
 #include <iostream>
 
 StatsManager::StatsManager()
@@ -19,7 +21,7 @@ void StatsManager::StartRecord(std::string recordName)
 		return;
 	}
 
-	records.insert({recordName, (float)glfwGetTime()});
+	records.insert({recordName, (float)TimeManager::GetInstance().GetTime()});
 }
 
 void StatsManager::EndRecord(std::string recordName)
@@ -30,7 +32,7 @@ void StatsManager::EndRecord(std::string recordName)
 		return;
 	}
 
-	float diff = (float)glfwGetTime() - records.find(recordName)->second;
+	float diff = (float)TimeManager::GetInstance().GetTime() - records.find(recordName)->second;
 	if (printResults)
 	{
 		std::cout << recordName + " took " << (diff * 1000) << "ms" << std::endl;

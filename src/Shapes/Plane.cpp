@@ -26,6 +26,8 @@ Plane::Plane(const char* texture, bool flip, bool billboard , float inScale)
 		1, 2, 3   // second Triangle
 	};
 
+	textureName = texture;
+
 	flipped = flip;
 	scale = inScale;
 	billboarded = billboard;

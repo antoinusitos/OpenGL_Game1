@@ -59,6 +59,8 @@ Cube::Cube(const char* texture)
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};*/
 
+	textureName = texture;
+
 	if (ResourceLoader::GetInstance().HasShape("Cube"))
 	{
 		VAO = ResourceLoader::GetInstance().GetShape("Cube");

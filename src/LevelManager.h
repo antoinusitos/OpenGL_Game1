@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class LevelManager
 {
 public:
@@ -14,5 +16,10 @@ public:
     LevelManager();
 
 	void LoadLevel(const char* levelName, const char* levelPropsName, bool loadingLands = true);
+
+    void EditorSaveLevel();
+
+private:
+    std::string lastOpenedLevel;
 };
 

@@ -19,7 +19,14 @@ LevelManager::LevelManager()
 //Cube:0.0f,-1.50f,0.0f:1.0f:dirt
 void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, bool loadingLands)
 {
-	std::ifstream file(levelName);
+	lastOpenedLevel = std::string(levelName);
+
+	const char* tempLevel = levelName;
+	if (!loadingLands)
+	{
+		tempLevel = levelPropsName;
+	}
+	std::ifstream file(tempLevel);
 	std::string str;
 	std::cout << "Loading " << levelName << " ..." << std::endl;
 
@@ -138,7 +145,7 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 		else if (entityType == "enviro")
 		{
 			entity = new Entity(glm::vec3(x, y, z));
-			if(y < 0)
+			if(y <= 0)
 			{
 				Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
 				if (retrievedEntity)
@@ -154,7 +161,7 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 		else if (entityType == "dynamic")
 		{
 			entity = new Entity(glm::vec3(x, y, z));
-			if (y < 0)
+			if (y <= 0)
 			{
 				Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
 				if (retrievedEntity)
@@ -170,7 +177,7 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 		else if (entityType == "enemy")
 		{
 			entity = new Enemy(glm::vec3(x, y, z));
-			if (y < 0)
+			if (y <= 0)
 			{
 				Entity* retrievedEntity = WorldManager::GetInstance().GetEntityAt(x, z);
 				if (retrievedEntity)
@@ -195,6 +202,23 @@ void LevelManager::LoadLevel(const char* levelName, const char* levelPropsName, 
 		WorldManager::GetInstance().xMax = maxX;
 		WorldManager::GetInstance().zMax = maxZ;
 		WorldManager::GetInstance().FillCells();
-		LoadLevel(levelPropsName, "", false);
+		LoadLevel(levelName, levelPropsName, false);
 	}
+}
+
+void LevelManager::EditorSaveLevel()
+{
+	std::ofstream file(lastOpenedLevel);
+	std::string str;
+	std::cout << "Saving " << lastOpenedLevel << " ..." << std::endl;
+	auto cells = WorldManager::GetInstance().GetCells();
+	std::string input = "";
+	for (std::pair<std::string, Entity*> cell : cells)
+	{
+		input += "Cube:" + std::to_string(cell.second->position.x) + "," + std::to_string(cell.second->position.y) + "," + std::to_string(cell.second->position.z) + ":0.0f,0.0f,0.0f:1.0f:" + cell.second->shape->textureName + ":static:Cube";
+		input += "\n";
+	}
+	std::cout << "Level Saved !" << std::endl;
+	file << input;
+	file.close();
 }

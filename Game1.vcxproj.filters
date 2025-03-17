@@ -78,6 +78,9 @@
     <ClCompile Include="src\StatsManager.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\TimeManager.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\3.3.coordinate_system.fs">
@@ -164,6 +167,9 @@
       <Filter>Source Files\src</Filter>
     </ClInclude>
     <ClInclude Include="src\StatsManager.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TimeManager.h">
       <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>

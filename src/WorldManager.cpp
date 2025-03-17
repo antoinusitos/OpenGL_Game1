@@ -22,6 +22,36 @@ void WorldManager::AddTempCell(Entity* newEntity)
 	tempCells.push_back(newEntity);
 }
 
+void WorldManager::EditModeAddCell(Entity* newEntity)
+{
+	int x = (int)newEntity->position.x;
+	int z = (int)newEntity->position.z;
+	if (cells.find(std::to_string(x) + "." + std::to_string(z)) != cells.end())
+	{
+		std::cout << "WARNING : already a cell at:" << x << " | " << z << std::endl;
+		return;
+	}
+
+	AddCell(x, z, newEntity);
+	if (x > xMax)
+	{
+		xMax = x;
+	}
+	if (z > zMax)
+	{
+		zMax = z;
+	}
+}
+
+void WorldManager::EditModeRemoveCell(Entity* entity)
+{
+	int x = (int)entity->position.x;
+	int z = (int)entity->position.z;
+	cells.erase(std::to_string(x) + "." + std::to_string(z));
+	entities.remove(entity);
+	delete entity;
+}
+
 void WorldManager::FillCells()
 {
 	for (Entity* e : tempCells)
@@ -32,7 +62,7 @@ void WorldManager::FillCells()
 
 void WorldManager::AddCell(int x, int z, Entity* newEntity)
 {
-	cells.insert({ z * (xMax+1) + x, newEntity});
+	cells.insert({ std::to_string(x) + "." + std::to_string(z), newEntity});
 	newEntity->entityName = "Cell" + std::to_string(z * xMax + x);
 }
 
@@ -48,7 +78,7 @@ Entity* WorldManager::GetEntityAt(int x, int z) const
 		return nullptr;
 	}
 
-	auto foundCell = cells.find(z * (xMax + 1) + x);
+	auto foundCell = cells.find(std::to_string(x) + "." + std::to_string(z));
 	if (foundCell != cells.end())
 	{
 		return foundCell->second;
@@ -73,4 +103,9 @@ void WorldManager::RemoveEntity(Entity* entity)
 	}
 	entities.remove(entity);
 	delete entity;
+}
+
+const std::map<std::string, Entity*> WorldManager::GetCells() const
+{
+	return cells;
 }

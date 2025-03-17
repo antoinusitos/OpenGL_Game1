@@ -151,6 +151,7 @@
     <ClCompile Include="src\Shapes\Shape.cpp" />
     <ClCompile Include="src\StatsManager.cpp" />
     <ClCompile Include="src\TextRendererManager.cpp" />
+    <ClCompile Include="src\TimeManager.cpp" />
     <ClCompile Include="src\WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +184,7 @@
     <ClInclude Include="src\Shapes\Shape.h" />
     <ClInclude Include="src\StatsManager.h" />
     <ClInclude Include="src\TextRendererManager.h" />
+    <ClInclude Include="src\TimeManager.h" />
     <ClInclude Include="src\WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
