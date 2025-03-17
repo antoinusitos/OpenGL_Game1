@@ -34,7 +34,7 @@ void Camera::Tick(float deltaTime)
     updateCameraVectors();
 
     std::string text = "POS: " + std::to_string(Position.x) + " | " + std::to_string(Position.y) + " | " + std::to_string(Position.z);
-    TextRendererManager::GetInstance().RenderText(text, 0.0f, 1080.0f - 48, 0.5f, glm::vec3(1.0f, 0.0f, 0.0f));
+    TextRendererManager::GetInstance().RenderText(text, 0.0f, 1080.0f - 48, 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
 
     if (!canMove)
     {

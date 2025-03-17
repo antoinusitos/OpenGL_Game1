@@ -110,6 +110,7 @@ void Game::Run()
 
 		if (editMode)
 		{
+			TextRendererManager::GetInstance().RenderText("EDIT MODE", 1920.0f / 2 - 100, 1080 - 48, 0.75f, glm::vec3(1, 0, 0));
 			TextRendererManager::GetInstance().RenderText("Texture:" + editorTextures[textureIndex], 0, 48, 0.5f, glm::vec3(0,0,1));
 		}
 
