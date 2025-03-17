@@ -31,16 +31,17 @@ private:
 	float lastX = SCR_WIDTH / 2;
 	float lastY = SCR_HEIGHT / 2;
 	bool firstMouse = true;
-	const bool useOrbit = true;
+	bool useOrbit = true;
 
 	Shader* ourShader;
 
 	//EDITOR
-	const bool editMode = true;
+	bool editMode = true;
 	bool hasClicked = false;
 	bool hasRightClicked = false;
 	bool hasTextureClicked = false;
 	bool hasSaved = false;
+	bool hasPClicked = false;
 	std::string editorTextures[2] = { "grass", "dirt" };
 	int textureIndex = 0;
 };

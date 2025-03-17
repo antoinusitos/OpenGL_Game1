@@ -165,6 +165,19 @@ void Game::processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera->ProcessKeyboard(RIGHT, deltaTime);
 
+	if (!hasPClicked && glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+	{
+		hasPClicked = true;
+		editMode = !editMode;
+		useOrbit = editMode;
+	}
+	if (hasPClicked && glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE)
+	{
+		hasPClicked = false;
+		camera->Yaw = 0;
+		camera->Pitch = 0;
+	}
+
 	if (editMode)
 	{
 		if (!hasClicked && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
